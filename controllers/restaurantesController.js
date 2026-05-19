@@ -60,3 +60,25 @@ exports.obtenerPlatosRestaurante = (req, res) => {
     });
 
 };
+exports.obtenerPlatosRestaurante = (req, res) => {
+
+    const id = req.params.id;
+
+    const sql = `
+        SELECT * FROM platos
+        WHERE restaurante_id = ?
+    `;
+
+    db.query(sql, [id], (err, results) => {
+
+        if (err) {
+
+            return res.status(500).json(err);
+
+        }
+
+        res.json(results);
+
+    });
+
+};
